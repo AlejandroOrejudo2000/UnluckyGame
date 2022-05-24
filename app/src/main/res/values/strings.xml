@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">UnluckyGame</string>
+    <string name="list_icon_tag">Ver lista</string>
+
+    <string name="menu_minigames">MINIJUEGOS</string>
+    <string name="menu_events">EVENTOS</string>
+    <string name="menu_penalties">CASTIGOS</string>
 </resources>
