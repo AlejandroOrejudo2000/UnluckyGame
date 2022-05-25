@@ -2,7 +2,14 @@
     <string name="app_name">UnluckyGame</string>
     <string name="list_icon_tag">Ver lista</string>
 
-    <string name="menu_minigames">MINIJUEGOS</string>
-    <string name="menu_events">EVENTOS</string>
-    <string name="menu_penalties">CASTIGOS</string>
+    <string name="minigames">MINIJUEGOS</string>
+    <string name="events">EVENTOS</string>
+    <string name="penalties">CASTIGOS</string>
+
+    <string name="selector_list">Lista</string>
+    <string name="selector_random">Aleatorio</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_random_fragment">Hello random fragment</string>
+    <string name="hello_list_fragment">Hello list fragment</string>
 </resources>

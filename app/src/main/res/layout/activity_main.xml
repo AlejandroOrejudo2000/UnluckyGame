@@ -23,14 +23,14 @@
             android:paddingVertical="10dp">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btnMinigames"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
-                android:text="@string/menu_minigames" />
+                android:text="@string/minigames" />
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/btnMinigamesList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -46,14 +46,14 @@
             android:paddingVertical="10dp">
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/btnEvents"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
-                android:text="@string/menu_events" />
+                android:text="@string/events" />
 
             <ImageButton
-                android:id="@+id/imageButton2"
+                android:id="@+id/btnEventsList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -70,14 +70,14 @@
             android:paddingVertical="10dp">
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/btnPenalties"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
-                android:text="@string/menu_penalties" />
+                android:text="@string/penalties" />
 
             <ImageButton
-                android:id="@+id/imageButton3"
+                android:id="@+id/btnPenaltiesList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
