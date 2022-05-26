@@ -1,11 +1,9 @@
 package com.games.unluckygame
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.games.unluckygame.data.DisplayInfo
-import com.games.unluckygame.data.DisplaySection
-import com.games.unluckygame.data.DisplayType
+import androidx.fragment.app.Fragment
+import com.games.unluckygame.fragments.SectionFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -13,19 +11,25 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btnMinigames.setOnClickListener { setActivityTarget(DisplayInfo(DisplaySection.MINIGAMES, DisplayType.RANDOM)) }
-        btnMinigamesList.setOnClickListener { setActivityTarget(DisplayInfo(DisplaySection.MINIGAMES, DisplayType.LIST)) }
-        btnEvents.setOnClickListener { setActivityTarget(DisplayInfo(DisplaySection.EVENTS, DisplayType.RANDOM)) }
-        btnEventsList.setOnClickListener { setActivityTarget(DisplayInfo(DisplaySection.EVENTS, DisplayType.LIST)) }
-        btnPenalties.setOnClickListener { setActivityTarget(DisplayInfo(DisplaySection.PENALTIES, DisplayType.RANDOM)) }
-        btnPenaltiesList.setOnClickListener { setActivityTarget(DisplayInfo(DisplaySection.PENALTIES, DisplayType.LIST)) }
-    }
+        val fragmentGames = SectionFragment("MINIJUEGOS")
+        val fragmentEvents = SectionFragment("EVENTOS")
+        val fragmentPenalties = SectionFragment("CASTIGOS")
 
-    private fun setActivityTarget(info : DisplayInfo){
-        Intent(this, DisplayActivity::class.java).also{
-            it.putExtra("displayInfo", info)
-            startActivity(it)
+        setCurrentFragment(fragmentGames)
+
+        bnvDisplays.setOnItemSelectedListener {
+            when(it.itemId){
+                R.id.games -> setCurrentFragment(fragmentGames)
+                R.id.events -> setCurrentFragment(fragmentEvents)
+                R.id.penalties -> setCurrentFragment(fragmentPenalties)
+            }
+            true
         }
     }
 
+    private fun setCurrentFragment(fragment: Fragment) =
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.flFragment, fragment)
+            commit()
+        }
 }
