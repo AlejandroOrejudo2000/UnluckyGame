@@ -8,14 +8,11 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.Toast
 import com.games.unluckygame.R
+import com.games.unluckygame.data.Item
 
-class SampleFragment(
-    private val sectionFragment: SectionFragment
+class SampleFragment<T : Item>(
+    private val sectionFragment: SectionFragment<T>
 ) : Fragment() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

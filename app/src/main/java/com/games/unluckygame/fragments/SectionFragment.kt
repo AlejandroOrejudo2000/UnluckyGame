@@ -8,19 +8,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.games.unluckygame.R
+import com.games.unluckygame.data.Item
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class SectionFragment (
-    private val name : String
+class SectionFragment<T : Item> (
+    private val name : String,
+    //BORRAR:
+    private val itemList: List<T>
 ): Fragment()
 {
-    private val fragmentSample = SampleFragment(this)
-    private val fragmentEmpty = EmptyFragment(this)
-    private val fragmentList = ListFragment()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private val fragmentSample = SampleFragment<T>(this)
+    private val fragmentEmpty = EmptyFragment<T>(this)
+    private val fragmentList = ListFragment<T>(this, itemList)
+    private val cardFragment = CardFragment<T>()
+    private var isListDisplayed = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,14 +36,21 @@ class SectionFragment (
         val bnv = root.findViewById<BottomNavigationView>(R.id.bnvDisplays)
         bnv.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.sample -> setCurrentFragment(fragmentEmpty)
-                R.id.list -> setCurrentFragment(fragmentList)
+                R.id.sample -> {
+                    setCurrentFragment(fragmentEmpty)
+                    isListDisplayed = false
+                }
+                R.id.list -> {
+                    setCurrentFragment(fragmentList)
+                    isListDisplayed = true
+                }
             }
             true
         }
-
-        bnv.selectedItemId = R.id.sample
-        setCurrentFragment(fragmentEmpty)
+        if(savedInstanceState != null){
+            isListDisplayed = savedInstanceState.getBoolean("isListDisplayed")
+        }
+        setCurrentFragment(if(isListDisplayed) fragmentList else fragmentEmpty)
 
         return root
     }
@@ -54,4 +62,14 @@ class SectionFragment (
             replace(R.id.flFragmentDisplay, fragment)
             commit()
         }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putBoolean("isListDisplayed", isListDisplayed)
+        super.onSaveInstanceState(outState)
+    }
+
+    fun displayItemCard(item : T){
+        cardFragment.item = item
+        cardFragment.show(childFragmentManager, "TAG")
+    }
 }
