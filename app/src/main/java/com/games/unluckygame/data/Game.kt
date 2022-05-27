@@ -13,6 +13,10 @@ data class Game(
     override val description: String,
 ) : Item
 {
+    override val getViewId = R.layout.slot_minigame
+    override val getCardId = R.layout.card_game
+    override val sampleSize = 3
+
     constructor(name: String, description: String) :
             this(name, Difficulty.EASY, Type.ALLVSALL,
             "recompensa", "materiales", description)
@@ -32,9 +36,6 @@ data class Game(
         COUPLES("Por parejas"),
         ALLVSALLDIRECTED("Todos contra todos (con un director)")
     }
-
-    override fun getViewId(): Int = R.layout.slot_minigame
-    override fun getCardId(): Int = R.layout.card_game
 
     override fun inflateView(view: View) {
         view.findViewById<TextView>(R.id.tvgameName).text = name

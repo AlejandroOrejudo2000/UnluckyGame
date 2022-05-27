@@ -10,6 +10,10 @@ data class Penalty(
     override var description: String
 ) : Item {
 
+    override val getViewId = R.layout.slot_penalty
+    override val getCardId = R.layout.card_penalty
+    override val sampleSize = 3
+
     constructor(name: String, description: String) : this(name, Difficulty.EASY, description)
 
     enum class Difficulty(val diff: String) {
@@ -18,9 +22,6 @@ data class Penalty(
         HARD("Alta"),
         EXTREME("Muy Alta")
     }
-
-    override fun getViewId(): Int = R.layout.slot_penalty
-    override fun getCardId(): Int = R.layout.card_penalty
 
     override fun inflateView(view: View) {
         view.findViewById<TextView>(R.id.tvPenaltyName).text = name

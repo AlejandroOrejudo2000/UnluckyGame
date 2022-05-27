@@ -13,15 +13,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class SectionFragment<T : Item> (
     private val name : String,
-    //BORRAR:
     private val itemList: List<T>
 ): Fragment()
 {
-    private val fragmentSample = SampleFragment<T>(this)
-    private val fragmentEmpty = EmptyFragment<T>(this)
+    private val fragmentSample = SampleFragment<T>(this, itemList)
     private val fragmentList = ListFragment<T>(this, itemList)
     private val cardFragment = CardFragment<T>()
-    private var isListDisplayed = false
+    var isListDisplayed = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,13 +29,13 @@ class SectionFragment<T : Item> (
         var root = inflater.inflate(R.layout.fragment_section, container, false)
 
         val tvTitle = root.findViewById<TextView>(R.id.tvTitle)
-        tvTitle.setText(name)
+        tvTitle.text = name
 
         val bnv = root.findViewById<BottomNavigationView>(R.id.bnvDisplays)
         bnv.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.sample -> {
-                    setCurrentFragment(fragmentEmpty)
+                    setCurrentFragment(fragmentSample)
                     isListDisplayed = false
                 }
                 R.id.list -> {
@@ -50,12 +48,10 @@ class SectionFragment<T : Item> (
         if(savedInstanceState != null){
             isListDisplayed = savedInstanceState.getBoolean("isListDisplayed")
         }
-        setCurrentFragment(if(isListDisplayed) fragmentList else fragmentEmpty)
-
+        setCurrentFragment(if(isListDisplayed) fragmentList else fragmentSample)
         return root
     }
     fun loadSample() = setCurrentFragment(fragmentSample)
-    fun dropSample() = setCurrentFragment(fragmentEmpty)
 
     private fun setCurrentFragment(fragment: Fragment) =
         activity?.supportFragmentManager?.beginTransaction()?.apply {

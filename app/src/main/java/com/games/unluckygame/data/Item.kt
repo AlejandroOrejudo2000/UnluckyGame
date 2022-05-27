@@ -6,7 +6,10 @@ interface Item {
     val name: String
     val description: String
 
-    abstract fun getViewId() : Int
-    abstract fun getCardId() : Int
+    abstract val sampleSize : Int
+    abstract val getViewId: Int
+    abstract val getCardId: Int
+
     abstract fun inflateView(view : View)
+
 }

@@ -15,7 +15,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         val gameList: MutableList<Game> = mutableListOf()
         val eventList: MutableList<Event> = mutableListOf()
         val penaltyList: MutableList<Penalty> = mutableListOf()

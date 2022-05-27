@@ -11,6 +11,10 @@ data class Event(
     var scope: Scope,
 ) : Item
 {
+    override val getViewId = R.layout.slot_event
+    override val getCardId = R.layout.card_event
+    override val sampleSize = 1
+
     constructor(name: String, description: String) :
             this(name, description, Type.ITEM, Scope.SINGLE)
 
@@ -27,9 +31,6 @@ data class Event(
         DOUBLE("Dos jugadores"),
         ALL("GLOBAL")
     }
-
-    override fun getViewId() = R.layout.slot_event
-    override fun getCardId() = R.layout.card_event
 
     override fun inflateView(view: View) {
         view.findViewById<TextView>(R.id.tvEventName).text = name

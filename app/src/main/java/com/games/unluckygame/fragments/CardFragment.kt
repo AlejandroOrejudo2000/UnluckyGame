@@ -17,7 +17,7 @@ class CardFragment<T : Item>(): DialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val cardLayoutId : Int = item?.getCardId() ?: R.layout.card_default
+        val cardLayoutId : Int = item?.getCardId ?: R.layout.card_default
         val root = inflater.inflate(cardLayoutId, container, false)
         item?.inflateView(root)
         return root
