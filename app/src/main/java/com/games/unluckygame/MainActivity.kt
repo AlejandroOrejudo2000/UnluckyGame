@@ -29,22 +29,21 @@ class MainActivity : AppCompatActivity() {
         val gameList: MutableList<Game> = mutableListOf()
         val eventList: MutableList<Event> = mutableListOf()
         val penaltyList: MutableList<Penalty> = mutableListOf()
-        for (i in 1..10){
-            gameList.add(Game(name = "Minijuego $i", description = "Desc $i"))
-            eventList.add(Event(name = "Evento $i", description = "Desc $i"))
-            penaltyList.add(Penalty(name = "Castigo $i", description = "Desc $i"))
+
+        lifecycleScope.launch {
+            for (i in 1..10){
+                gameList.add(Game(name = "Minijuego $i", description = "Desc $i"))
+                eventList.add(Event(name = "Evento $i", description = "Desc $i"))
+                penaltyList.add(Penalty(name = "Castigo $i", description = "Desc $i"))
+            }
+            gameList.forEach { gameDao.insertGame(it) }
+            eventList.forEach { eventDao.insertEvent(it) }
+            penaltyList.forEach { penaltyDao.insertPenalty(it) }
         }
 
-        gameList.forEach { gameDao.insertGame(it) }
-        eventList.forEach { eventDao.insertEvent(it) }
-        penaltyList.forEach { penaltyDao.insertPenalty(it) }
 
-        val d = gameDao.getGameWithName("Minijuego 2")
-        println("------------> ${d.name}")
-
-
-        val fragmentGames = GameSectionFragment("MINIJUEGOS")
-        val fragmentEvents = EventSectionFragment("EVENTOS")
+        val fragmentGames = GameSectionFragment("MINIJUEGOS", gameDao)
+        val fragmentEvents = EventSectionFragment("EVENTOS", eventDao)
         val fragmentPenalties = PenaltySectionFragment("CASTIGOS", penaltyDao)
 
         setCurrentFragment(fragmentGames)

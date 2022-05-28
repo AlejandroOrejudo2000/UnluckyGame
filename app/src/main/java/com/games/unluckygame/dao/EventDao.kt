@@ -8,13 +8,13 @@ import com.games.unluckygame.entity.Game
 interface EventDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertEvent(event: Event)
+    suspend fun insertEvent(event: Event)
 
     @Transaction
     @Query("SELECT * FROM events_table where name = :eventName")
-    fun getEventWithName(eventName: String): Event
+    suspend fun getEventWithName(eventName: String): Event
 
     @Transaction
     @Query("SELECT * FROM events_table")
-    fun getAll(): List<Event>
+    suspend fun getAll(): List<Event>
 }

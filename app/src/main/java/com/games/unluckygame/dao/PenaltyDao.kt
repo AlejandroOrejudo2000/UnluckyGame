@@ -9,13 +9,13 @@ import com.games.unluckygame.entity.Penalty
 interface PenaltyDao{
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertPenalty(penalty: Penalty)
+    suspend fun insertPenalty(penalty: Penalty)
 
     @Transaction
     @Query("SELECT * FROM penalties_table where name = :penaltyName")
-    fun getPenaltyWithName(penaltyName: String): Penalty
+    suspend fun getPenaltyWithName(penaltyName: String): Penalty
 
     @Transaction
     @Query("SELECT * FROM penalties_table")
-    fun getAll(): List<Penalty>
+    suspend fun getAll(): List<Penalty>
 }

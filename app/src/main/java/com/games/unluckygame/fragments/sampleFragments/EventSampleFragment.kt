@@ -1,20 +1,24 @@
 package com.games.unluckygame.fragments.sampleFragments
 
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.games.unluckygame.adapter.EventItemAdapter
 import com.games.unluckygame.adapter.GameItemAdapter
 import com.games.unluckygame.adapter.ItemAdapter
+import com.games.unluckygame.dao.EventDao
+import com.games.unluckygame.dao.PenaltyDao
 import com.games.unluckygame.entity.Event
 import com.games.unluckygame.entity.Game
 import com.games.unluckygame.fragments.sectionFragments.EventSectionFragment
 import com.games.unluckygame.fragments.sectionFragments.GameSectionFragment
 import com.games.unluckygame.fragments.sectionFragments.SectionFragment
+import kotlinx.coroutines.launch
 
 class EventSampleFragment(
     private val sectionFragment: EventSectionFragment,
-    private val itemList : List<Event>
+    private val dao : EventDao
 ): SampleFragment() {
 
     private var sample : MutableList<Event> = mutableListOf()
@@ -30,13 +34,16 @@ class EventSampleFragment(
     }
 
     override fun generateSample() {
-        if(itemList.isEmpty()) return
-        val randomIndexes = itemList.indices.shuffled()
-        clearSample()
-        for (i in 0 until 1){
-            sample.add(itemList[randomIndexes[i]])
+        lifecycleScope.launch{
+            val itemList = dao.getAll()
+            if(itemList.isNotEmpty()) {
+                val randomIndexes = itemList.indices.shuffled()
+                clearSample()
+                for (i in 0 until 3){
+                    sample.add(itemList[randomIndexes[i]])
+                }
+            }
+            setUpRecyclerView(rv)
         }
     }
-
-
 }

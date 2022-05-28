@@ -47,10 +47,7 @@ class PenaltySampleFragment(
                     sample.add(itemList[randomIndexes[i]])
                 }
             }
-
+            setUpRecyclerView(rv)
         }
-
     }
-
-
 }

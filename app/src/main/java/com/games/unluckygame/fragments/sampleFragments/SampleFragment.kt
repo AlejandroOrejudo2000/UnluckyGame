@@ -17,18 +17,18 @@ abstract class SampleFragment(
 
 ) : Fragment() {
 
+    protected lateinit var rv : RecyclerView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_sample, container, false)
-        val rv = root.findViewById<RecyclerView>(R.id.rvSample)
+        rv = root.findViewById<RecyclerView>(R.id.rvSample)
         setUpRecyclerView(rv)
 
         val btnSwap = root.findViewById<ImageButton>(R.id.btnSwap)
         btnSwap.setOnClickListener {
             generateSample()
-            setUpRecyclerView(rv)
             rv.adapter?.notifyDataSetChanged()
         }
         val btnDrop = root.findViewById<ImageButton>(R.id.btnDrop)

@@ -17,7 +17,7 @@ class PenaltySectionFragment(
     private val dao: PenaltyDao
 ) : SectionFragment(name) {
     override val sampleFragment = PenaltySampleFragment(this, dao)
-    override val listFragment = PenaltyListFragment(this, mutableListOf())
+    override val listFragment = PenaltyListFragment(this, dao)
     override val cardFragment = PenaltyCardFragment()
 
     fun displayItemCard(item: Penalty) {
