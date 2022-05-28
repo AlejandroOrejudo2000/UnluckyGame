@@ -3,17 +3,28 @@ package com.games.unluckygame
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.games.unluckygame.data.Event
-import com.games.unluckygame.data.Game
-import com.games.unluckygame.data.Penalty
-import com.games.unluckygame.fragments.CardFragment
-import com.games.unluckygame.fragments.SectionFragment
+import androidx.lifecycle.lifecycleScope
+import com.games.unluckygame.database.GameDataBase
+import com.games.unluckygame.entity.Event
+import com.games.unluckygame.entity.Game
+import com.games.unluckygame.entity.Penalty
+import com.games.unluckygame.fragments.sectionFragments.EventSectionFragment
+import com.games.unluckygame.fragments.sectionFragments.GameSectionFragment
+import com.games.unluckygame.fragments.sectionFragments.PenaltySectionFragment
+import com.games.unluckygame.fragments.sectionFragments.SectionFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val db = GameDataBase.getInstance(this)
+        val gameDao = db.gameDao()
+        val penaltyDao = db.penaltyDao()
+        val eventDao = db.eventDao()
+
 
         val gameList: MutableList<Game> = mutableListOf()
         val eventList: MutableList<Event> = mutableListOf()
@@ -24,9 +35,17 @@ class MainActivity : AppCompatActivity() {
             penaltyList.add(Penalty(name = "Castigo $i", description = "Desc $i"))
         }
 
-        val fragmentGames = SectionFragment<Game>("MINIJUEGOS", gameList)
-        val fragmentEvents = SectionFragment<Event>("EVENTOS", eventList)
-        val fragmentPenalties = SectionFragment<Penalty>("CASTIGOS", penaltyList)
+        gameList.forEach { gameDao.insertGame(it) }
+        eventList.forEach { eventDao.insertEvent(it) }
+        penaltyList.forEach { penaltyDao.insertPenalty(it) }
+
+        val d = gameDao.getGameWithName("Minijuego 2")
+        println("------------> ${d.name}")
+
+
+        val fragmentGames = GameSectionFragment("MINIJUEGOS")
+        val fragmentEvents = EventSectionFragment("EVENTOS")
+        val fragmentPenalties = PenaltySectionFragment("CASTIGOS", penaltyDao)
 
         setCurrentFragment(fragmentGames)
 
