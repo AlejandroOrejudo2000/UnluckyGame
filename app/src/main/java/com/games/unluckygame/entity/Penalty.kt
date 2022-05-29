@@ -11,7 +11,7 @@ import com.games.unluckygame.R
 data class Penalty(
     @PrimaryKey(autoGenerate = false)
     override var name: String,
-    var difficulty: Difficulty,
+    var difficulty: String,
     override var description: String
 ) : Item {
 
@@ -19,14 +19,7 @@ data class Penalty(
     @Ignore override val cardId = R.layout.card_penalty
     @Ignore override val sampleSize = 3
 
-    constructor(name: String, description: String) : this(name, Difficulty.EASY, description)
-
-    enum class Difficulty(val diff: String) {
-        EASY("Baja"),
-        MEDIUM("Media"),
-        HARD("Alta"),
-        EXTREME("Muy Alta")
-    }
+    constructor(name: String, description: String) : this(name, "Facil", description)
 
     override fun inflateView(view: View) {
         view.findViewById<TextView>(R.id.tvPenaltyName).text = name

@@ -11,8 +11,8 @@ import com.games.unluckygame.R
 data class Game(
     @PrimaryKey(autoGenerate = false)
     override var name: String,
-    var difficulty: Difficulty,
-    var type: Type,
+    var difficulty: String,
+    var type: String,
     var reward : String,
     var materials: String,
     override val description: String,
@@ -23,24 +23,8 @@ data class Game(
     @Ignore override val sampleSize = 3
 
     constructor(name: String, description: String) :
-            this(name, Difficulty.EASY, Type.ALLVSALL,
+            this(name, "Facil", "Todos contra todos",
             "recompensa", "materiales", description)
-
-    enum class Difficulty(val diff: String) {
-        EASY("Baja"),
-        MEDIUM("Media"),
-        HARD("Alta")
-    }
-    enum class Type (var t : String) {
-        DUEL("1 vs 1"),
-        TEAMS("Por equipos"),
-        ALLVSALL("Todos contra todos"),
-        ONEVSALL("Uno contra todos"),
-        FOUR("Cuatrop jugadores"),
-        GROUP("Grupal"),
-        COUPLES("Por parejas"),
-        ALLVSALLDIRECTED("Todos contra todos (con un director)")
-    }
 
     override fun inflateView(view: View) {
         view.findViewById<TextView>(R.id.tvgameName).text = name

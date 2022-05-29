@@ -4,8 +4,9 @@ import android.content.ContentResolver
 import android.net.Uri
 import android.util.Log
 import androidx.fragment.app.FragmentActivity
-import org.apache.poi.ss.usermodel.FormulaEvaluator
-import org.apache.poi.ss.usermodel.Row
+import com.games.unluckygame.database.GameDataBase
+import com.games.unluckygame.entity.*
+import org.apache.poi.ss.usermodel.*
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import java.io.*
 import java.lang.NullPointerException
@@ -14,68 +15,72 @@ import java.lang.StringBuilder
 object ExcelReader {
 
     private const val TAG = "EXCELREADER"
+    private const val ROWSIZE_GAME = 6
+    private const val ROWSIZE_EVENT = 4
+    private const val ROWSIZE_PENALTY = 3
 
-    fun readExcelFile(filepath: String){
-        Log.d(TAG, "Reading excel file")
-        val inputFile = File(filepath)
-        try {
+    private val sb = StringBuilder()
 
-            val inputStream : InputStream = FileInputStream(inputFile)
+    fun readExcelFile(inputStream: InputStream) : String{
+        sb.clear()
+        val workbook = XSSFWorkbook(inputStream)
+        val formulaEvaluator = workbook.creationHelper.createFormulaEvaluator()
+        val numberofsheets = workbook.numberOfSheets
+        for(i in 0 until numberofsheets)
+        {
+            readExcelSheet(workbook.getSheetAt(i), formulaEvaluator)
+        }
+        return sb.toString()
+    }
 
-            val workbook = XSSFWorkbook(inputStream)
-            val sheet = workbook.getSheetAt(0)
-            val rows = sheet.physicalNumberOfRows
-            val formulaEvaluator = workbook.creationHelper.createFormulaEvaluator()
-            val sb = StringBuilder()
-
-            for(i in 0..rows){
-                val row = sheet.getRow(i)
-                val cols = row.count()
-                for(j in 0..cols){
-                    val value = getCellAsString(row, j, formulaEvaluator)
-                    val cellInfo = "r:" + i + "c:" + j +"v:" + value
-                    sb.append(cellInfo)
-                }
-                sb.append(" : ")
+    private fun readExcelSheet(sheet: Sheet, formulaEvaluator: FormulaEvaluator){
+        val rows = sheet.physicalNumberOfRows
+        for(i in 0 until rows) {
+            val row = sheet.getRow(i)
+            when(row.count()) {
+                ROWSIZE_GAME -> readExcelRowAsGame(row, formulaEvaluator)
+                ROWSIZE_EVENT -> readExcelRowAsEvent(row, formulaEvaluator)
+                ROWSIZE_PENALTY -> readExcelRowAsPenalty(row, formulaEvaluator)
             }
-            Log.d(TAG, sb.toString())
-        }
-        catch (e : FileNotFoundException){
-            Log.e(TAG, "FileNotFoundException. ${e.message}")
-        }
-        catch (e : IOException){
-            Log.e(TAG, "IOException. ${e.message}")
         }
     }
 
-    fun readFile(uri: Uri, contentResolver: ContentResolver?){
-        contentResolver?.let {
-            val inputStream = it.openInputStream(uri)
-            val workbook = XSSFWorkbook(inputStream)
-            val sheet = workbook.getSheetAt(0)
-            println("NAME: ${sheet.sheetName}")
-            val rows = sheet.physicalNumberOfRows
-            println(rows)
-            val formulaEvaluator = workbook.creationHelper.createFormulaEvaluator()
-            val sb = StringBuilder()
-            for(i in 0 until rows){
-                val row = sheet.getRow(i)
-                val cols = row.count()
-                for(j in 0 until cols){
-                    val value = getCellAsString(row, j, formulaEvaluator)
-                    val cellInfo = "r-$i,c-$j,-v:$value"
-                    sb.append(cellInfo)
-                }
-                sb.append(" : ")
-            }
-            println(sb.toString())
+    private fun readExcelRowAsGame(row: Row, formulaEvaluator: FormulaEvaluator){
+        val name = getCellAsString(row.getCell(0), formulaEvaluator)
+        val diff = getCellAsString(row.getCell(1), formulaEvaluator)
+        val type = getCellAsString(row.getCell(2), formulaEvaluator)
+        val reward = getCellAsString(row.getCell(3), formulaEvaluator)
+        val mat = getCellAsString(row.getCell(4), formulaEvaluator)
+        val desc = getCellAsString(row.getCell(5), formulaEvaluator)
+        if(!name.isNullOrBlank() && !diff.isNullOrBlank() && !type.isNullOrBlank() &&
+            !reward.isNullOrBlank() && !mat.isNullOrBlank() && !desc.isNullOrBlank()){
+            sb.append("g:$name:$diff:$type:$reward:$mat:$desc;")
         }
     }
 
-    private fun getCellAsString(row: Row, c: Int, formulaEvaluator: FormulaEvaluator) : String{
-        var value : String = ""
+    private fun readExcelRowAsEvent(row: Row, formulaEvaluator: FormulaEvaluator){
+        val name = getCellAsString(row.getCell(0), formulaEvaluator)
+        val desc = getCellAsString(row.getCell(1), formulaEvaluator)
+        val type = getCellAsString(row.getCell(2), formulaEvaluator)
+        val scope = getCellAsString(row.getCell(3), formulaEvaluator)
+        if(!name.isNullOrBlank() && !type.isNullOrBlank() &&
+            !scope.isNullOrBlank() && !desc.isNullOrBlank()){
+            sb.append("e:$name:$type:$scope:$desc;")
+        }
+    }
+
+    private fun readExcelRowAsPenalty(row: Row, formulaEvaluator: FormulaEvaluator){
+        val name = getCellAsString(row.getCell(0), formulaEvaluator)
+        val diff = getCellAsString(row.getCell(1), formulaEvaluator)
+        val desc = getCellAsString(row.getCell(2), formulaEvaluator)
+        if(!name.isNullOrBlank() && !diff.isNullOrBlank() && !desc.isNullOrBlank()){
+            sb.append("p:$name:$diff:$desc;")
+        }
+    }
+
+    private fun getCellAsString(cell : Cell, formulaEvaluator: FormulaEvaluator) : String?{
+        var value : String? = null
         try{
-            val cell = row.getCell(c)
             val cellValue = formulaEvaluator.evaluate(cell)
             value = cellValue.stringValue
         }catch (e : NullPointerException){
@@ -84,8 +89,14 @@ object ExcelReader {
         return value
     }
 
-    fun parseStringBuilder(sb : StringBuilder){
-        val rows = sb.toString().split(":")
+    private fun getCellAsNumber(cell : Cell, formulaEvaluator: FormulaEvaluator) : Int?{
+        var value : Int? = null
+        try{
+            val cellValue = formulaEvaluator.evaluate(cell)
+            value = cellValue.numberValue as Int
+        }catch (e : NullPointerException){
+            Log.e(TAG, "NullPointerException. ${e.message}")
+        }
+        return value
     }
-
 }

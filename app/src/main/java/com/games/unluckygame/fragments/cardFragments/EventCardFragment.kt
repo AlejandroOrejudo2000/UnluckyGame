@@ -16,7 +16,7 @@ class EventCardFragment : CardFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.card_game, container, false)
+        val root = inflater.inflate(R.layout.card_event, container, false)
         root.findViewById<TextView>(R.id.tvEventName).text = event?.name
         root.findViewById<TextView>(R.id.tvEventType).text = event?.toString()
         root.findViewById<TextView>(R.id.tvEventScope).text = event?.scope.toString()

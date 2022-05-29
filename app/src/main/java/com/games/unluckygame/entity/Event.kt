@@ -11,9 +11,9 @@ import com.games.unluckygame.R
 data class Event(
     @PrimaryKey(autoGenerate = false)
     override val name: String,
+    var type: String,
+    var scope: String,
     override val description: String,
-    var type: Type,
-    var scope: Scope,
 ) : Item
 {
     @Ignore override val slotId = R.layout.slot_event
@@ -21,21 +21,7 @@ data class Event(
     @Ignore override val sampleSize = 1
 
     constructor(name: String, description: String) :
-            this(name, description, Type.ITEM, Scope.SINGLE)
-
-    enum class Type(val t: String){
-        ITEM("Objeto reservable"),
-        CELL("Evento de casilla"),
-        CHAOTIC("Caos"),
-        SCOREMODIFIER("Modificador de puntos")
-
-    }
-
-    enum class Scope(val s: String){
-        SINGLE("Individual"),
-        DOUBLE("Dos jugadores"),
-        ALL("GLOBAL")
-    }
+            this(name, description, "Objeto reservable", "Individual")
 
     override fun inflateView(view: View) {
         view.findViewById<TextView>(R.id.tvEventName).text = name

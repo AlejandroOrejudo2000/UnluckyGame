@@ -20,7 +20,9 @@ abstract class ItemAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemAdapterViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.slot_minigame, parent, false)
+        val view = inflater.inflate(getLayoutId(), parent, false)
         return ItemAdapterViewHolder(view)
     }
+
+    abstract fun getLayoutId() : Int
 }

@@ -15,6 +15,33 @@ abstract class GameDataBase : RoomDatabase(){
     abstract fun penaltyDao(): PenaltyDao
     abstract fun eventDao(): EventDao
 
+    suspend fun insertStringData(data : String){
+        val lines = data.split(";")
+        for(line in lines){
+            var cells = line.split(":")
+            when(cells.count()){
+                6 -> insertStringAsGame(cells)
+                4 -> insertStringAsEvent(cells)
+                3 -> insertStringAsPenalty(cells)
+            }
+        }
+    }
+
+    private suspend fun insertStringAsGame(d : List<String>){
+        val game = Game(d[0],d[1],d[2],d[3],d[4],d[5])
+        gameDao().insertGame(game)
+    }
+
+    private suspend fun insertStringAsEvent(d : List<String>){
+        val event = Event(d[0],d[1],d[2],d[3])
+        eventDao().insertEvent(event)
+    }
+
+    private suspend fun insertStringAsPenalty(d : List<String>){
+        val penalty = Penalty(d[0],d[1],d[2])
+        penaltyDao().insertPenalty(penalty)
+    }
+
     companion object{
         @Volatile
         private var INSTANCE: GameDataBase? = null
