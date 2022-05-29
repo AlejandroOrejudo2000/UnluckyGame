@@ -1,17 +1,20 @@
 package com.games.unluckygame.fragments.sectionFragments
 
+import android.net.Uri
 import android.os.Bundle
 
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import com.games.unluckygame.R
-import com.games.unluckygame.entity.Game
 import com.games.unluckygame.fragments.cardFragments.CardFragment
 import com.games.unluckygame.fragments.listFragments.ListFragment
 import com.games.unluckygame.fragments.sampleFragments.SampleFragment
+import com.games.unluckygame.utils.ExcelReader
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 abstract class SectionFragment(
@@ -21,12 +24,24 @@ abstract class SectionFragment(
     abstract val sampleFragment : SampleFragment
     abstract val listFragment : ListFragment
     abstract val cardFragment : CardFragment
-    var isListDisplayed = false
+    private var isListDisplayed = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
+        val startForResult = registerForActivityResult(ActivityResultContracts.OpenDocument()) {
+            uri : Uri? ->
+
+            uri?.let {
+                val path = uri.lastPathSegment
+                println(path)
+                ExcelReader.readFile(uri, activity?.contentResolver)
+            }
+
+        }
 
         // ROOT
         var root = inflater.inflate(R.layout.fragment_section, container, false)
@@ -49,6 +64,13 @@ abstract class SectionFragment(
                 }
             }
             true
+        }
+
+        val btnLoadData = root.findViewById<ImageButton>(R.id.btnLoadData)
+        btnLoadData.setOnClickListener {
+            startForResult.launch(arrayOf(
+                "application/vnd.ms-excel",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
         }
 
         // AWAKE
