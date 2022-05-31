@@ -18,9 +18,13 @@ class PenaltyCardFragment : CardFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.card_penalty, container, false)
-        root.findViewById<TextView>(R.id.tvPenaltyName).text = penalty?.name
-        root.findViewById<TextView>(R.id.tvPenaltyDiff).text = penalty?.difficulty.toString()
-        root.findViewById<TextView>(R.id.tvPenaltyDesc).text = penalty?.description
+        penalty?.let {
+            penalty: Penalty ->
+            root.findViewById<TextView>(R.id.tvPenaltyName).text = penalty.name
+            root.findViewById<TextView>(R.id.tvPenaltyDiff).text = penalty.difficulty
+            root.findViewById<TextView>(R.id.tvPenaltyDesc).text = penalty.description
+        }
+
         return root
     }
 }

@@ -17,22 +17,4 @@ data class Game(
     var materials: String,
     override val description: String,
 ) : Item
-{
-    @Ignore override val slotId = R.layout.slot_minigame
-    @Ignore override val cardId = R.layout.card_game
-    @Ignore override val sampleSize = 3
 
-    constructor(name: String, description: String) :
-            this(name, "Facil", "Todos contra todos",
-            "recompensa", "materiales", description)
-
-    override fun inflateView(view: View) {
-        view.findViewById<TextView>(R.id.tvgameName).text = name
-        view.findViewById<TextView>(R.id.tvGameDiff).text = difficulty.toString()
-        view.findViewById<TextView>(R.id.tvGameType).text = type.toString()
-        view.findViewById<TextView>(R.id.tvGameReward).text = reward
-        view.findViewById<TextView>(R.id.tvGameMaterials).text = materials
-        view.findViewById<TextView>(R.id.tvGameDesc).text = description
-    }
-
-}

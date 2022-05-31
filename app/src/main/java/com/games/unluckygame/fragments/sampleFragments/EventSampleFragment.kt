@@ -36,10 +36,10 @@ class EventSampleFragment(
     override fun generateSample() {
         lifecycleScope.launch{
             val itemList = dao.getAll()
+            clearSample()
             if(itemList.isNotEmpty()) {
                 val randomIndexes = itemList.indices.shuffled()
-                clearSample()
-                for (i in 0 until 3){
+                for (i in 0 until 1.coerceAtMost(itemList.size)){
                     sample.add(itemList[randomIndexes[i]])
                 }
             }

@@ -15,20 +15,4 @@ data class Event(
     var scope: String,
     override val description: String,
 ) : Item
-{
-    @Ignore override val slotId = R.layout.slot_event
-    @Ignore override val cardId = R.layout.card_event
-    @Ignore override val sampleSize = 1
 
-    constructor(name: String, description: String) :
-            this(name, description, "Objeto reservable", "Individual")
-
-    override fun inflateView(view: View) {
-        view.findViewById<TextView>(R.id.tvEventName).text = name
-        view.findViewById<TextView>(R.id.tvEventType).text = type.toString()
-        view.findViewById<TextView>(R.id.tvEventScope).text = scope.toString()
-        view.findViewById<TextView>(R.id.tvEventDesc).text = description
-    }
-
-
-}

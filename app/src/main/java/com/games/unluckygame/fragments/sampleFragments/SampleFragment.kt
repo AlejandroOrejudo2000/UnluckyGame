@@ -43,5 +43,8 @@ abstract class SampleFragment(
     abstract fun setUpRecyclerView(recyclerView: RecyclerView)
     abstract fun clearSample()
     abstract fun generateSample()
-
+    fun reloadRecyclerView(){
+        generateSample()
+        setUpRecyclerView(rv)
+    }
 }

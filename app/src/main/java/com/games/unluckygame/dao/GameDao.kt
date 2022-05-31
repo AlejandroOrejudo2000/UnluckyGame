@@ -16,4 +16,8 @@ interface GameDao{
     @Transaction
     @Query("SELECT * FROM games_table")
     suspend fun getAll(): List<Game>
+
+    @Transaction
+    @Query("DELETE FROM games_table")
+    suspend fun clear()
 }

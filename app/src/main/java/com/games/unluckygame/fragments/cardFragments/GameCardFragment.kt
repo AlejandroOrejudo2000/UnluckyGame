@@ -17,12 +17,15 @@ class GameCardFragment : CardFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.card_game, container, false)
-        root.findViewById<TextView>(R.id.tvgameName).text = game?.name
-        root.findViewById<TextView>(R.id.tvGameDiff).text = game?.difficulty.toString()
-        root.findViewById<TextView>(R.id.tvGameType).text = game?.type.toString()
-        root.findViewById<TextView>(R.id.tvGameReward).text = game?.reward
-        root.findViewById<TextView>(R.id.tvGameMaterials).text = game?.materials
-        root.findViewById<TextView>(R.id.tvGameDesc).text = game?.description
+        game?.let {
+            game: Game ->
+            root.findViewById<TextView>(R.id.tvgameName).text = game.name
+            root.findViewById<TextView>(R.id.tvGameDiff).text = game.difficulty
+            root.findViewById<TextView>(R.id.tvGameType).text = game.type
+            root.findViewById<TextView>(R.id.tvGameReward).text = game.reward
+            root.findViewById<TextView>(R.id.tvGameMaterials).text = game.materials
+            root.findViewById<TextView>(R.id.tvGameDesc).text = game.description
+        }
         return root
     }
 }

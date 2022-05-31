@@ -24,4 +24,6 @@ class PenaltyListFragment(
         val adapter = PenaltyItemAdapter(dao.getAll(), sectionFragment)
         recyclerView.adapter = adapter
     }
+
+
 }

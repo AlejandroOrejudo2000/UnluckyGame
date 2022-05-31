@@ -17,17 +17,23 @@ import kotlinx.coroutines.launch
 abstract class ListFragment(
 ) : Fragment() {
 
+    lateinit var rv: RecyclerView
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_list, container, false)
-        val rv = root.findViewById<RecyclerView>(R.id.rv)
-        lifecycleScope.launch{
+        rv = root.findViewById<RecyclerView>(R.id.rv)
+        lifecycleScope.launch {
             setUpRecyclerView(rv)
         }
         return root
     }
 
-    abstract suspend fun setUpRecyclerView(recyclerView: RecyclerView);
+    abstract suspend fun setUpRecyclerView(recyclerView: RecyclerView)
+
+    suspend fun reloadRecyclerView(){
+        setUpRecyclerView(rv)
+    }
 }

@@ -18,4 +18,8 @@ interface PenaltyDao{
     @Transaction
     @Query("SELECT * FROM penalties_table")
     suspend fun getAll(): List<Penalty>
+
+    @Transaction
+    @Query("DELETE FROM penalties_table")
+    suspend fun clear()
 }

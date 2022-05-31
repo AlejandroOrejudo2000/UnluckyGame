@@ -20,11 +20,17 @@ abstract class GameDataBase : RoomDatabase(){
         for(line in lines){
             var cells = line.split(":")
             when(cells.count()){
-                6 -> insertStringAsGame(cells)
-                4 -> insertStringAsEvent(cells)
-                3 -> insertStringAsPenalty(cells)
+                GAMECELLS -> insertStringAsGame(cells)
+                EVENTCELLS -> insertStringAsEvent(cells)
+                PENALTYCELLS -> insertStringAsPenalty(cells)
             }
         }
+    }
+
+    suspend fun clearAllData(){
+        gameDao().clear()
+        penaltyDao().clear()
+        eventDao().clear()
     }
 
     private suspend fun insertStringAsGame(d : List<String>){
@@ -45,6 +51,9 @@ abstract class GameDataBase : RoomDatabase(){
     companion object{
         @Volatile
         private var INSTANCE: GameDataBase? = null
+        private val GAMECELLS = 6
+        private val EVENTCELLS = 4
+        private val PENALTYCELLS = 3
 
         fun getInstance(context: Context): GameDataBase{
             synchronized(this){
