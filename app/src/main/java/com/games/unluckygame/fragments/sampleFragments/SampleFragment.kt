@@ -44,7 +44,9 @@ abstract class SampleFragment(
     abstract fun clearSample()
     abstract fun generateSample()
     fun reloadRecyclerView(){
-        generateSample()
-        setUpRecyclerView(rv)
+        if(::rv.isInitialized){
+            generateSample()
+            setUpRecyclerView(rv)
+        }
     }
 }

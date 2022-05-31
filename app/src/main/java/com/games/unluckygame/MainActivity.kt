@@ -41,6 +41,11 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var currentFrag: SectionFragment
 
+    private lateinit var gameFrag: GameSectionFragment
+    private lateinit var eventFrag: EventSectionFragment
+    private lateinit var penaltyFrag: PenaltySectionFragment
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -68,7 +73,9 @@ class MainActivity : AppCompatActivity() {
                 lifecycleScope.launch{
                     Toast.makeText(this@MainActivity, "a", Toast.LENGTH_LONG)
                     GameDataBase.getInstance(this@MainActivity).clearAllData()
-                    currentFrag.clear()
+                    gameFrag.clear()
+                    eventFrag.clear()
+                    penaltyFrag.clear()
                 }
             }
             .setNegativeButton("No"){ _, _ ->
@@ -86,17 +93,17 @@ class MainActivity : AppCompatActivity() {
         val penaltyDao = db.penaltyDao()
         val eventDao = db.eventDao()
 
-        val fragmentGames = GameSectionFragment("MINIJUEGOS", gameDao)
-        val fragmentEvents = EventSectionFragment("EVENTOS", eventDao)
-        val fragmentPenalties = PenaltySectionFragment("CASTIGOS", penaltyDao)
+        gameFrag = GameSectionFragment("MINIJUEGOS", gameDao)
+        eventFrag = EventSectionFragment("EVENTOS", eventDao)
+        penaltyFrag = PenaltySectionFragment("CASTIGOS", penaltyDao)
 
-        setCurrentFragment(fragmentGames)
+        setCurrentFragment(gameFrag)
 
         bnvDisplays.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.games -> setCurrentFragment(fragmentGames)
-                R.id.events -> setCurrentFragment(fragmentEvents)
-                R.id.penalties -> setCurrentFragment(fragmentPenalties)
+                R.id.games -> setCurrentFragment(gameFrag)
+                R.id.events -> setCurrentFragment(eventFrag)
+                R.id.penalties -> setCurrentFragment(penaltyFrag)
             }
             true
         }
