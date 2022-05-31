@@ -1,57 +1,70 @@
-package com.games.unluckygame.fragments
+package com.games.unluckygame.fragments.sectionFragments
 
+import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.lifecycleScope
 import com.games.unluckygame.R
-import com.games.unluckygame.data.Item
+import com.games.unluckygame.database.GameDataBase
+import com.games.unluckygame.fragments.cardFragments.CardFragment
+import com.games.unluckygame.fragments.listFragments.ListFragment
+import com.games.unluckygame.fragments.sampleFragments.SampleFragment
+import com.games.unluckygame.utils.XlsxReader
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.launch
 
-class SectionFragment<T : Item> (
-    private val name : String,
-    private val itemList: List<T>
+abstract class SectionFragment(
+    private val name: String
 ): Fragment()
 {
-    private val fragmentSample = SampleFragment<T>(this, itemList)
-    private val fragmentList = ListFragment<T>(this, itemList)
-    private val cardFragment = CardFragment<T>()
-    var isListDisplayed = false
+    abstract val sampleFragment : SampleFragment
+    abstract val listFragment : ListFragment
+    abstract val cardFragment : CardFragment
+    private var isListDisplayed = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
+        // ROOT
         var root = inflater.inflate(R.layout.fragment_section, container, false)
 
+        // TITLE
         val tvTitle = root.findViewById<TextView>(R.id.tvTitle)
         tvTitle.text = name
 
+        // BUTTONS
         val bnv = root.findViewById<BottomNavigationView>(R.id.bnvDisplays)
         bnv.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.sample -> {
-                    setCurrentFragment(fragmentSample)
+                    setCurrentFragment(sampleFragment)
                     isListDisplayed = false
                 }
                 R.id.list -> {
-                    setCurrentFragment(fragmentList)
+                    setCurrentFragment(listFragment)
                     isListDisplayed = true
                 }
             }
             true
         }
+
+        // AWAKE
         if(savedInstanceState != null){
             isListDisplayed = savedInstanceState.getBoolean("isListDisplayed")
         }
-        setCurrentFragment(if(isListDisplayed) fragmentList else fragmentSample)
+        setCurrentFragment(if(isListDisplayed) listFragment else sampleFragment)
         return root
     }
-    fun loadSample() = setCurrentFragment(fragmentSample)
 
     private fun setCurrentFragment(fragment: Fragment) =
         activity?.supportFragmentManager?.beginTransaction()?.apply {
@@ -64,8 +77,14 @@ class SectionFragment<T : Item> (
         super.onSaveInstanceState(outState)
     }
 
-    fun displayItemCard(item : T){
-        cardFragment.item = item
-        cardFragment.show(childFragmentManager, "TAG")
+    suspend fun refresh(){
+        listFragment.reloadRecyclerView()
     }
+
+    suspend fun clear(){
+        listFragment.reloadRecyclerView()
+        sampleFragment.reloadRecyclerView()
+    }
+
+
 }

@@ -3,8 +3,8 @@
 
     <item
         android:id="@+id/sample"
-        android:title="Aleatorio"
-        android:icon="@drawable/ic_baseline_more_horiz_24"/>
+        android:icon="@drawable/dice"
+        android:title="Aleatorio" />
 
     <item
         android:id="@+id/list"
