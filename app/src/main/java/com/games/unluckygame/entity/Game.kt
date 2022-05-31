@@ -13,8 +13,8 @@ data class Game(
     override var name: String,
     var difficulty: String,
     var type: String,
-    var reward : String,
     var materials: String,
+    var reward : String,
     override val description: String,
 ) : Item
 

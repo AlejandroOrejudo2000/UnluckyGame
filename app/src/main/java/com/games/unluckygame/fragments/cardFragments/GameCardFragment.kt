@@ -23,7 +23,7 @@ class GameCardFragment : CardFragment() {
             root.findViewById<TextView>(R.id.tvGameDiff).text = game.difficulty
             root.findViewById<TextView>(R.id.tvGameType).text = game.type
             root.findViewById<TextView>(R.id.tvGameReward).text = game.reward
-            root.findViewById<TextView>(R.id.tvGameMaterials).text = game.materials
+            root.findViewById<TextView>(R.id.tvGameMaterials).text = "Materiales: ${game.materials}"
             root.findViewById<TextView>(R.id.tvGameDesc).text = game.description
         }
         return root

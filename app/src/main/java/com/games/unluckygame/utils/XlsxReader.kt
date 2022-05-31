@@ -16,8 +16,9 @@ object XlsxReader {
         val numberOfSheets = workbook.numberOfSheets
         for(i in 0 until numberOfSheets)
         {
-            val stringSheet = readExcelSheet(workbook.getSheetAt(i), formulaEvaluator)
-            sb.append("$stringSheet")
+            val sheet = workbook.getSheetAt(i)
+            if(sheet != null)
+                sb.append(readExcelSheet(workbook.getSheetAt(i), formulaEvaluator))
         }
         return sb.toString()
     }
@@ -26,7 +27,8 @@ object XlsxReader {
         val sb = StringBuilder()
         for(i in 0 until sheet.physicalNumberOfRows) {
             val row = sheet.getRow(i)
-            sb.append("${readExcelRow(row, formulaEvaluator)};")
+            if(row != null)
+                sb.append("${readExcelRow(row, formulaEvaluator)};")
         }
         return sb
     }

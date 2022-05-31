@@ -34,6 +34,7 @@ abstract class ListFragment(
     abstract suspend fun setUpRecyclerView(recyclerView: RecyclerView)
 
     suspend fun reloadRecyclerView(){
-        setUpRecyclerView(rv)
+        if(rv != null)
+            setUpRecyclerView(rv)
     }
 }

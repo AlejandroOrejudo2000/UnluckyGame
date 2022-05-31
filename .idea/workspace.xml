@@ -14,11 +14,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b1ba9009-e51b-4e05-8cf8-1dcad5f19f21" name="Changes" comment="[FEAT] DisplayActivity base">
-      <change afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_baseline_file_upload_24.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_baseline_remove_24.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_baseline_settings_24.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/menu/app_bar_menu.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.3.3/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.3/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.3.3/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.3/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.3.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.3/fileHashes/fileHashes.bin" afterDir="false" />
@@ -26,34 +22,14 @@
       <change beforePath="$PROJECT_DIR$/.gradle/7.3.3/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.3/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/dao/EventDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/dao/EventDao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/dao/GameDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/dao/GameDao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/dao/PenaltyDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/dao/PenaltyDao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/database/GameDataBase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/database/GameDataBase.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/entity/Event.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/entity/Event.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/release/output-metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/release/output-metadata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/release/unluckygame_0.0.1.apk" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/entity/Game.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/entity/Game.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/entity/Item.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/entity/Item.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/entity/Penalty.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/entity/Penalty.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/fragments/cardFragments/EventCardFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/fragments/cardFragments/EventCardFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/fragments/cardFragments/GameCardFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/fragments/cardFragments/GameCardFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/fragments/cardFragments/PenaltyCardFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/fragments/cardFragments/PenaltyCardFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/fragments/listFragments/ListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/fragments/listFragments/ListFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/fragments/listFragments/PenaltyListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/fragments/listFragments/PenaltyListFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/fragments/sampleFragments/EventSampleFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/fragments/sampleFragments/EventSampleFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/fragments/sampleFragments/GameSampleFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/fragments/sampleFragments/GameSampleFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/fragments/sampleFragments/PenaltySampleFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/fragments/sampleFragments/PenaltySampleFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/fragments/sampleFragments/SampleFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/fragments/sampleFragments/SampleFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/fragments/sectionFragments/SectionFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/fragments/sectionFragments/SectionFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/utils/ExcelReader.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/card_event.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/card_event.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/card_game.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/card_game.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/card_penalty.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/card_penalty.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_section.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_section.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/utils/XlsxReader.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/games/unluckygame/utils/XlsxReader.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
