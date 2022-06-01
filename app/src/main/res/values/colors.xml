@@ -8,7 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFF</color>
 
-    <color name="game_slot">#8BC34A</color>
-    <color name="event_slot">#63A9E1</color>
-    <color name="penalty_slot">#AA7881</color>
+    <color name="game_slot">#3296C8</color>
+    <color name="event_slot">#ECBA58</color>
+    <color name="penalty_slot">#D84A40</color>
 </resources>

@@ -9,7 +9,8 @@
     app:cardElevation="6dp"
     app:cardBackgroundColor="@color/game_slot"
     app:cardCornerRadius="20dp"
-    app:contentPadding="4dp">
+    app:contentPadding="4dp"
+    android:theme="@style/Theme.content">
 
     <RelativeLayout
         android:layout_width="match_parent"
